@@ -1,0 +1,40 @@
+monitoring:
+  enabled: true
+
+  drift_detection:
+    enabled: true
+    window_size: 100
+    reference_window_size: 1000
+    metrics:
+      - "data_drift"
+      - "prediction_drift"
+
+  quality_metrics:
+    enabled: true
+    track_metrics:
+      - "response_length"
+      - "response_time"
+      - "token_count"
+      - "perplexity"
+
+  logging:
+    log_level: "INFO"
+    log_predictions: true
+    log_inputs: true
+    max_log_size_mb: 100
+
+  alerts:
+    enabled: false
+    drift_threshold: 0.5
+    quality_threshold: 0.7
+
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "llmops-finetuning"
+  run_name_prefix: "run"
+  log_system_metrics: true
+  log_model: true
+
+  tags:
+    project: "llmops-pipeline"
+    team: "ml-engineering"

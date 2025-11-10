@@ -1,0 +1,37 @@
+api:
+  title: "LLMOps Fine-tuned Model API"
+  description: "Production-ready API for serving fine-tuned LLMs"
+  version: "1.0.0"
+  host: "0.0.0.0"
+  port: 8000
+  workers: 2
+  reload: false
+  log_level: "info"
+
+inference:
+  max_length: 512
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  do_sample: true
+  num_return_sequences: 1
+  repetition_penalty: 1.1
+
+rate_limiting:
+  enabled: true
+  max_requests_per_minute: 60
+
+monitoring:
+  enabled: true
+  log_predictions: true
+  drift_detection_window: 100
+
+cors:
+  allow_origins:
+    - "*"
+  allow_credentials: true
+  allow_methods:
+    - "*"
+  allow_headers:
+    - "*"

@@ -1,0 +1,59 @@
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+.eggs
+dist
+build
+
+# Virtual Environment
+venv
+env
+.venv
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Git
+.git
+.gitignore
+
+# Data and Models
+data/raw
+models/cache
+mlruns
+mlartifacts
+
+# Logs
+logs
+*.log
+
+# Tests
+tests
+.pytest_cache
+.coverage
+htmlcov
+
+# Documentation
+*.md
+docs
+
+# Docker
+docker-compose*.yml
+Dockerfile*
+
+# CI/CD
+.github
+
+# Other
+.env
+.env.local
+*.tmp
+tmp
+temp

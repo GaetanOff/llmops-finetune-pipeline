@@ -1,0 +1,60 @@
+model:
+  name: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  max_length: 512
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - v_proj
+    - k_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  output_dir: "./models/checkpoints"
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  lr_scheduler_type: "cosine"
+  logging_steps: 10
+  save_steps: 100
+  eval_steps: 100
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  greater_is_better: false
+  fp16: true
+  gradient_checkpointing: true
+  optim: "paged_adamw_8bit"
+  max_grad_norm: 0.3
+
+evaluation:
+  metrics:
+    - "bleu"
+    - "rouge"
+    - "perplexity"
+  batch_size: 8
+  max_new_tokens: 256
+
+dataset:
+  train_file: "data/processed/train.jsonl"
+  eval_file: "data/processed/eval.jsonl"
+  test_file: "data/processed/test.jsonl"
+  text_field: "text"
+  max_samples: null
+  validation_split: 0.1
+  test_split: 0.1
